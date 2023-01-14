@@ -659,7 +659,7 @@ class FileListFragment : Fragment(), BreadcrumbLayout.Listener, FileListAdapter.
     private fun openInTerminal() {
         val path = currentPath
         if (path.isLinuxPath) {
-            Terminal.open(path.toFile().path, requireContext())
+            Terminal.open(path.toFile().path, requireContext(), requireActivity())
         } else {
             // TODO
         }
