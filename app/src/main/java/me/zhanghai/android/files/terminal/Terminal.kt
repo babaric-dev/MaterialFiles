@@ -22,14 +22,15 @@ object Terminal {
             .putExtra("com.termux.RUN_COMMAND_WORKDIR", path)
             .putExtra("com.termux.RUN_COMMAND_BACKGROUND", false)
             .putExtra("com.termux.RUN_COMMAND_SESSION_ACTION", "0")
+        if (ContextCompat.checkSelfPermission(context, "com.termux.permission.RUN_COMMAND") == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(activity, arrayOf("com.termux.permission.RUN_COMMAND"), 0)
+        }
         if (ContextCompat.checkSelfPermission(context, "com.termux.permission.RUN_COMMAND") == PackageManager.PERMISSION_GRANTED) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 context.startForegroundService(intent)
             } else {
                 context.startService(intent)
             }
-        } else {
-            ActivityCompat.requestPermissions(activity, arrayOf("com.termux.permission.RUN_COMMAND"), 0)
-        }
+        } 
     }
 }
